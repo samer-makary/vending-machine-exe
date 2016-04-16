@@ -110,6 +110,10 @@ public class Wallet {
 	public double getPoundValue() {
 		return getPennyValue() / 100.0;
 	}
+	
+	public int getDenominationCount(Denomination denom) {
+		return money.get(denom);
+	}
 
 	/**
 	 * Tries to decompose the given value using the denominations available in

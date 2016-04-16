@@ -26,7 +26,7 @@ import javax.swing.JSeparator;
 public class VendingMachine {
 
 	private final Machine controller;
-	
+
 	private JFrame frmVendingMachine;
 	private JTextField textFieldInPound2;
 	private JTextField textFieldInPound1;
@@ -67,6 +67,7 @@ public class VendingMachine {
 	private JButton btnProduct3;
 	private JButton btnProduct10;
 	private JButton btnProduct5;
+	private JTextArea textAreaMachineDisplay;
 
 	/**
 	 * Launch the application.
@@ -115,17 +116,19 @@ public class VendingMachine {
 				.setBorder(new TitledBorder(null, "Machine Display", TitledBorder.LEADING,
 						TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 20),
 						UIManager.getColor("TitledBorder.titleColor")));
-		panelDisplay.setBounds(15, 16, 509, 104);
+		panelDisplay.setBounds(15, 15, 510, 150);
 		consumerPanel.add(panelDisplay);
 		panelDisplay.setLayout(null);
 
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setBounds(15, 27, 479, 61);
-		panelDisplay.add(textArea);
+		textAreaMachineDisplay = new JTextArea();
+		textAreaMachineDisplay.setLineWrap(true);
+		textAreaMachineDisplay.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textAreaMachineDisplay.setEditable(false);
+		textAreaMachineDisplay.setBounds(15, 27, 479, 107);
+		panelDisplay.add(textAreaMachineDisplay);
 
 		JPanel panelProducts = new JPanel();
-		panelProducts.setBounds(15, 135, 510, 220);
+		panelProducts.setBounds(15, 171, 510, 220);
 		panelProducts.setBorder(new TitledBorder(null, "Products", TitledBorder.LEADING,
 				TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 20),
 				UIManager.getColor("TitledBorder.titleColor")));
@@ -136,7 +139,8 @@ public class VendingMachine {
 		btnProduct1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnProduct1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectedProduct = 0;
+				if (selectedProduct == -1)
+					selectedProduct = 0;
 			}
 		});
 		panelProducts.add(btnProduct1);
@@ -145,7 +149,8 @@ public class VendingMachine {
 		btnProduct2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnProduct2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectedProduct = 1;
+				if (selectedProduct == -1)
+					selectedProduct = 1;
 			}
 		});
 		panelProducts.add(btnProduct2);
@@ -154,43 +159,86 @@ public class VendingMachine {
 		btnProduct3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnProduct3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectedProduct = 2;
+				if (selectedProduct == -1)
+					selectedProduct = 2;
 			}
 		});
 		panelProducts.add(btnProduct3);
 
 		btnProduct4 = new JButton("X");
 		btnProduct4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnProduct4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedProduct == -1)
+					selectedProduct = 3;
+			}
+		});
 		panelProducts.add(btnProduct4);
 
 		btnProduct5 = new JButton("X");
 		btnProduct5.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnProduct5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedProduct == -1)
+					selectedProduct = 4;
+			}
+		});
 		panelProducts.add(btnProduct5);
 
 		btnProduct6 = new JButton("X");
 		btnProduct6.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnProduct6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedProduct == -1)
+					selectedProduct = 5;
+			}
+		});
 		panelProducts.add(btnProduct6);
 
 		btnProduct7 = new JButton("X");
 		btnProduct7.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnProduct7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedProduct == -1)
+					selectedProduct = 6;
+			}
+		});
 		panelProducts.add(btnProduct7);
 
 		btnProduct8 = new JButton("X");
 		btnProduct8.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnProduct8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedProduct == -1)
+					selectedProduct = 7;
+			}
+		});
 		panelProducts.add(btnProduct8);
 
 		btnProduct9 = new JButton("X");
 		btnProduct9.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnProduct9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedProduct == -1)
+					selectedProduct = 8;
+			}
+		});
 		panelProducts.add(btnProduct9);
 
 		btnProduct10 = new JButton("X");
 		btnProduct10.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnProduct10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedProduct == -1)
+					selectedProduct = 9;
+			}
+		});
 		panelProducts.add(btnProduct10);
 
 		JPanel panelCashIn = new JPanel();
 		panelCashIn.setBorder(new TitledBorder(null, "Cash In", TitledBorder.LEADING,
 				TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 20), null));
-		panelCashIn.setBounds(15, 355, 509, 118);
+		panelCashIn.setBounds(15, 396, 509, 118);
 		consumerPanel.add(panelCashIn);
 		panelCashIn.setLayout(new GridLayout(2, 8, 2, 2));
 
@@ -287,7 +335,7 @@ public class VendingMachine {
 				.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"),
 						"Cash Out", TitledBorder.LEADING, TitledBorder.TOP,
 						new Font("Tahoma", Font.PLAIN, 20), new Color(0, 0, 0)));
-		panelCashOut.setBounds(15, 566, 509, 118);
+		panelCashOut.setBounds(15, 588, 509, 118);
 		consumerPanel.add(panelCashOut);
 		panelCashOut.setLayout(new GridLayout(2, 8, 2, 2));
 
@@ -388,26 +436,40 @@ public class VendingMachine {
 		panelCashOut.add(textFieldOutPenny1);
 
 		JPanel panelActions = new JPanel();
-		panelActions.setBounds(15, 476, 509, 55);
+		panelActions.setBounds(15, 517, 509, 55);
 		consumerPanel.add(panelActions);
 		panelActions.setLayout(new GridLayout(1, 3, 5, 5));
 
-		JButton btnBuy = new JButton("Buy :D");
+		JButton btnBuy = new JButton("Buy");
 		btnBuy.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnBuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("The selected product is " + selectedProduct);
+				if (selectedProduct == -1) {
+					displayMsg("Please select a product first!");
+					return;
+				}
+				controller.handleStartOrContinueTransaction(VendingMachine.this, selectedProduct);
 			}
 		});
 		panelActions.add(btnBuy);
 
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.handleCancel(VendingMachine.this);
+			}
+		});
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		panelActions.add(btnCancel);
 
-		JButton btnThanks = new JButton("Thanks!");
-		btnThanks.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		panelActions.add(btnThanks);
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				handleClear();
+			}
+		});
+		btnClear.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		panelActions.add(btnClear);
 
 		JPanel maintenancePanel = new JPanel();
 		tabbedPane.addTab("Maintenance", null, maintenancePanel, null);
@@ -655,7 +717,7 @@ public class VendingMachine {
 
 		JButton btnReload = new JButton("Reload");
 		btnReload.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.handleCashReload(VendingMachine.this);
@@ -665,63 +727,83 @@ public class VendingMachine {
 		btnReload.setBounds(210, 515, 115, 30);
 		maintenancePanel.add(btnReload);
 	}
+
 	public JTextField getTextFieldInPound2() {
 		return textFieldInPound2;
 	}
+
 	public JTextField getTextFieldInPenny1() {
 		return textFieldInPenny1;
 	}
+
 	public JTextField getTextFieldInPenny10() {
 		return textFieldInPenny10;
 	}
+
 	public JTextField getTextFieldInPenny2() {
 		return textFieldInPenny2;
 	}
+
 	public JTextField getTextFieldInPound1() {
 		return textFieldInPound1;
 	}
+
 	public JTextField getTextFieldInPenny20() {
 		return textFieldInPenny20;
 	}
+
 	public JTextField getTextFieldInPenny50() {
 		return textFieldInPenny50;
 	}
+
 	public JTextField getTextFieldInPenny5() {
 		return textFieldInPenny5;
 	}
+
 	public JTextField getTextFieldReloadPound2() {
 		return textFieldReloadPound2;
 	}
+
 	public JTextField getTextFieldReloadPenny10() {
 		return textFieldReloadPenny10;
 	}
+
 	public JTextField getTextFieldReloadPenny20() {
 		return textFieldReloadPenny20;
 	}
+
 	public JTextField getTextFieldReloadPenny5() {
 		return textFieldReloadPenny5;
 	}
+
 	public JTextField getTextFieldReloadPound1() {
 		return textFieldReloadPound1;
 	}
+
 	public JTextField getTextFieldReloadPenny50() {
 		return textFieldReloadPenny50;
 	}
+
 	public JTextField getTextFieldReloadPenny1() {
 		return textFieldReloadPenny1;
 	}
+
 	public JTextField getTextFieldReloadPenny2() {
 		return textFieldReloadPenny2;
 	}
+
 	public JTextField getTextFieldSlotProductName() {
 		return textFieldSlotProductName;
 	}
+
 	public JTextField getTextFieldSlotProductPounds() {
 		return textFieldSlotProductPounds;
 	}
+
 	public JTextField getTextFieldSlotProductPennies() {
 		return textFieldSlotProductPennies;
-	}	
+	}
+
 	public JButton getBtnProductAt(int index) {
 		switch (index) {
 		case 0:
@@ -747,5 +829,57 @@ public class VendingMachine {
 		default:
 			return null;
 		}
+	}
+
+	public void displayMsg(String msg) {
+		textAreaMachineDisplay.setText(msg);
+	}
+	public JTextField getTextFieldOutPenny50() {
+		return textFieldOutPenny50;
+	}
+	public JTextField getTextFieldOutPenny5() {
+		return textFieldOutPenny5;
+	}
+	public JTextField getTextFieldOutPenny2() {
+		return textFieldOutPenny2;
+	}
+	public JTextField getTextFieldOutPound2() {
+		return textFieldOutPound2;
+	}
+	public JTextField getTextFieldOutPenny10() {
+		return textFieldOutPenny10;
+	}
+	public JTextField getTextFieldOutPenny20() {
+		return textFieldOutPenny20;
+	}
+	public JTextField getTextFieldOutPound1() {
+		return textFieldOutPound1;
+	}
+	public JTextField getTextFieldOutPenny1() {
+		return textFieldOutPenny1;
+	}
+
+	public void clearSelectedProduct() {
+		this.selectedProduct = -1;
+	}
+
+	private void handleClear() {
+		displayMsg("");
+		textFieldInPenny1.setText("");
+		textFieldInPenny2.setText("");
+		textFieldInPenny5.setText("");
+		textFieldInPenny10.setText("");
+		textFieldInPenny20.setText("");
+		textFieldInPenny50.setText("");
+		textFieldInPound1.setText("");
+		textFieldInPound2.setText("");
+		textFieldOutPenny1.setText("");
+		textFieldOutPenny2.setText("");
+		textFieldOutPenny5.setText("");
+		textFieldOutPenny10.setText("");
+		textFieldOutPenny20.setText("");
+		textFieldOutPenny50.setText("");
+		textFieldOutPound1.setText("");
+		textFieldOutPound2.setText("");
 	}
 }
