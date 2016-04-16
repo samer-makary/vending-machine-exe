@@ -7,7 +7,7 @@ public class Dispenser {
 	 * the same product. The user selects the slot number that corresponds to
 	 * the product that she wants to buy.
 	 */
-	public static final int NUM_PRODUCTS_SLOTS = 30;
+	public static final int NUM_PRODUCTS_SLOTS = 10;
 
 	/**
 	 * Max number of units of a specific product that can be placed in a
@@ -104,5 +104,16 @@ public class Dispenser {
 
 		p.takeOne();
 		return p.getProductName();
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Dispenser_BEG");
+		for (int i = 0; i < machineProducts.length; i++) {
+			sb.append(String.format("\n  @%02d --> %s,", i, machineProducts[i]));
+		}
+		sb.append("\nDispenser_END");
+		return sb.toString();
 	}
 }

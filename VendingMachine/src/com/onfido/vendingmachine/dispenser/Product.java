@@ -17,7 +17,7 @@ public class Product {
 
 	private int availableUnits;
 
-	private double unitCost;
+	private float unitCost;
 
 	/**
 	 * Creates a new vending machine product by setting its name and
@@ -27,12 +27,16 @@ public class Product {
 	 * 
 	 * @param productName
 	 *            The product name.
+	 * @param unitCost
+	 *            Unit cost in Pounds.
 	 */
-	public Product(String productName, double unitCost) {
+	public Product(String productName, float unitCost) {
 		if (productName == null || productName.isEmpty())
-			throw new IllegalArgumentException("New product name cannot be " + productName);
+			throw new IllegalArgumentException(
+					"New product name cannot be " + productName);
 		if (Double.compare(unitCost, 0) <= 0)
-			throw new IllegalArgumentException("New product unit-cost cannot be " + unitCost);
+			throw new IllegalArgumentException(
+					"New product unit-cost cannot be " + unitCost);
 
 		this.productName = productName;
 		this.unitCost = unitCost;
@@ -53,16 +57,16 @@ public class Product {
 	 * 
 	 * @return product unit-cost.
 	 */
-	public double getUnitCost() {
+	public float getUnitCost() {
 		return unitCost;
 	}
 
-	/**
-	 * Sets the number of available units of the product to be equal to the
-	 * maximum number of spaces available in the dispenser slot.
-	 * {@link Dispenser#SPACES_PER_SLOT}
-	 */
-	/* package */ void restock() {
+			/**
+			 * Sets the number of available units of the product to be equal to
+			 * the maximum number of spaces available in the dispenser slot.
+			 * {@link Dispenser#SPACES_PER_SLOT}
+			 */
+			/* package */ void restock() {
 		this.availableUnits = Dispenser.SPACES_PER_SLOT;
 	}
 
@@ -75,14 +79,14 @@ public class Product {
 		return availableUnits > 0;
 	}
 
-	/**
-	 * Decrements the number of available units of this product by 1, i.e. one
-	 * unit is taken.
-	 * 
-	 * @throws IllegalStateException
-	 *             if no product unit is available.
-	 */
-	/* package */ void takeOne() {
+			/**
+			 * Decrements the number of available units of this product by 1,
+			 * i.e. one unit is taken.
+			 * 
+			 * @throws IllegalStateException
+			 *             if no product unit is available.
+			 */
+			/* package */ void takeOne() {
 		if (isAvailable())
 			availableUnits--;
 		else
@@ -91,7 +95,8 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return String.format("Product[name=%s, unit-cost=%.2f, avail-units=%d]", productName,
+		return String.format("Product[name=%s, unit-cost=%.2f, avail-units=%d]",
+				productName,
 				unitCost, availableUnits);
 	}
 
