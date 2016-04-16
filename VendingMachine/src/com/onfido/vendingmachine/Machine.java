@@ -88,7 +88,8 @@ public class Machine {
 		Product selectedProduct = dispenser.getProduct(selectedSlotIdx);
 		if (selectedProduct == null || !selectedProduct.isAvailable()) {
 			vm.displayMsg(String.format(
-					"The selected slot [%d] has no available product.", selectedSlotIdx));
+					"The selected slot [%d] has no available product.",
+					selectedSlotIdx + 1));
 			vm.clearSelectedProduct();
 			return;
 		}
@@ -115,6 +116,7 @@ public class Machine {
 		Transaction.Response transResponse = ongoingTransaction.execute();
 		switch (transResponse) {
 		case TRANS_SUCCESSFUL:
+			dispenser.dispenseProduct(ongoingTransaction.getSelectedProductSlotNumber());
 			outputChange(vm, ongoingTransaction.getChange());
 			vm.displayMsg("Enjoy!.\n"
 					+ "Please collect any change then click [Clear]");
